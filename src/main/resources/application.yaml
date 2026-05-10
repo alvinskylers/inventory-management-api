@@ -1,3 +1,15 @@
 spring:
   application:
     name: products
+
+  datasource:
+    url: jdbc:h2:mem:products
+    driverClassName: org.h2.Driver
+    username: alvinskylers
+    password: password
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
