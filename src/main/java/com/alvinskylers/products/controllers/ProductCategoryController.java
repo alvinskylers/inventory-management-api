@@ -1,5 +1,6 @@
 package com.alvinskylers.products.controllers;
 
+import com.alvinskylers.products.dto.ProductCategoryRequest;
 import com.alvinskylers.products.dto.ProductCategoryResponse;
 import com.alvinskylers.products.entity.ProductCategory;
 import com.alvinskylers.products.mapper.ProductCategoryMapper;
@@ -7,11 +8,9 @@ import com.alvinskylers.products.service.ProductCategoryService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -56,5 +55,11 @@ public class ProductCategoryController {
         response.put("time", LocalDateTime.now());
 
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping
+    public ResponseEntity<ProductCategoryResponse> create(@RequestBody ProductCategoryRequest request) {
+        ProductCategoryResponse response = productCategoryService.createCategory(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }

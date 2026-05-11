@@ -10,6 +10,7 @@ public class ProductCategoryMapper {
 
     public ProductCategory toEntity(ProductCategoryRequest request) {
         return ProductCategory.builder()
+                .id(request.id())
                 .name(request.name())
                 .description(request.description())
                 .build();
