@@ -1,6 +1,6 @@
 package com.alvinskylers.products.dto;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
 
@@ -11,11 +11,11 @@ public record ProductCategoryRequest(
 
         BigInteger id,
 
-        @NotNull
-        @Size(min=3, max=5)
+        @NotBlank(message = "Name is required")
+        @Size(min=3, max=20, message="name is 3 to 20 characters")
         String name,
 
-        @Size(min=5)
+        @Size(min=5, message = "description is less than 5 characters")
         String description
 ) {
 

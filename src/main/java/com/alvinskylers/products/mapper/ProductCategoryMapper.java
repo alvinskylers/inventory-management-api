@@ -23,4 +23,9 @@ public class ProductCategoryMapper {
                 .description(entity.getDescription())
                 .build();
     }
+
+    public void mapRequestToEntity(ProductCategory productCategory, ProductCategoryRequest request) {
+        productCategory.setName(request.name());
+        productCategory.setDescription(request.description());
+    }
 }

@@ -5,6 +5,8 @@ import com.alvinskylers.products.dto.ProductCategoryResponse;
 import com.alvinskylers.products.entity.ProductCategory;
 import com.alvinskylers.products.mapper.ProductCategoryMapper;
 import com.alvinskylers.products.service.ProductCategoryService;
+import jakarta.validation.Valid;
+import org.apache.coyote.Response;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -59,7 +61,7 @@ public class ProductCategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductCategoryResponse> create(@RequestBody ProductCategoryRequest request) {
+    public ResponseEntity<ProductCategoryResponse> create(@Valid @RequestBody ProductCategoryRequest request) {
         ProductCategoryResponse response = productCategoryService.createCategory(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
@@ -68,5 +70,14 @@ public class ProductCategoryController {
     public ResponseEntity<ProductCategoryResponse> show(@PathVariable BigInteger id) {
         ProductCategoryResponse response = productCategoryService.findCategory(id);
         return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductCategoryResponse> update(
+            @PathVariable BigInteger id,
+            @Valid @RequestBody ProductCategoryRequest request
+    ) {
+        ProductCategoryResponse response = productCategoryService.updateCategory(id, request);
+        return  ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

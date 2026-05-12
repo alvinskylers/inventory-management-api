@@ -3,7 +3,7 @@ package com.alvinskylers.products.service;
 import com.alvinskylers.products.dto.ProductCategoryRequest;
 import com.alvinskylers.products.dto.ProductCategoryResponse;
 import com.alvinskylers.products.entity.ProductCategory;
-import com.alvinskylers.products.exception.ProductCategoryException;
+import com.alvinskylers.products.exception.ProductCategoryNotFoundException;
 import com.alvinskylers.products.mapper.ProductCategoryMapper;
 import com.alvinskylers.products.repository.ProductCategoryRepository;
 import org.springframework.data.domain.Page;
@@ -36,8 +36,14 @@ public class ProductCategoryService {
 
     public ProductCategoryResponse findCategory(BigInteger id) {
         ProductCategory entity = productCategoryRepository.findById(id)
-                .orElseThrow(() -> new ProductCategoryException(id));
+                .orElseThrow(() -> new ProductCategoryNotFoundException(id));
         return productCategoryMapper.toResponse(entity);
+    }
 
+    public ProductCategoryResponse updateCategory(BigInteger id, ProductCategoryRequest request) {
+        ProductCategory entity = productCategoryRepository.findById(id)
+                .orElseThrow(() -> new ProductCategoryNotFoundException(id));
+        productCategoryMapper.mapRequestToEntity(entity, request);
+        return productCategoryMapper.toResponse(productCategoryRepository.save(entity));
     }
 }
