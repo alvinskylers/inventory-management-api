@@ -3,11 +3,14 @@ package com.alvinskylers.products.service;
 import com.alvinskylers.products.dto.ProductCategoryRequest;
 import com.alvinskylers.products.dto.ProductCategoryResponse;
 import com.alvinskylers.products.entity.ProductCategory;
+import com.alvinskylers.products.exception.ProductCategoryException;
 import com.alvinskylers.products.mapper.ProductCategoryMapper;
 import com.alvinskylers.products.repository.ProductCategoryRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.math.BigInteger;
 
 @Service
 public class ProductCategoryService {
@@ -29,5 +32,12 @@ public class ProductCategoryService {
     public ProductCategoryResponse createCategory(ProductCategoryRequest request) {
         ProductCategory entity = productCategoryMapper.toEntity(request);
         return productCategoryMapper.toResponse(productCategoryRepository.save(entity));
+    }
+
+    public ProductCategoryResponse findCategory(BigInteger id) {
+        ProductCategory entity = productCategoryRepository.findById(id)
+                .orElseThrow(() -> new ProductCategoryException(id));
+        return productCategoryMapper.toResponse(entity);
+
     }
 }

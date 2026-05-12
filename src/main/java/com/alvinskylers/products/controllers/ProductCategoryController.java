@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -61,5 +62,11 @@ public class ProductCategoryController {
     public ResponseEntity<ProductCategoryResponse> create(@RequestBody ProductCategoryRequest request) {
         ProductCategoryResponse response = productCategoryService.createCategory(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductCategoryResponse> show(@PathVariable BigInteger id) {
+        ProductCategoryResponse response = productCategoryService.findCategory(id);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }
