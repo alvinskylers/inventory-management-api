@@ -34,20 +34,20 @@ public class ProductCategoryService {
         return productCategoryMapper.toResponse(productCategoryRepository.save(entity));
     }
 
-    public ProductCategoryResponse findCategory(BigInteger id) {
+    public ProductCategoryResponse findCategory(Long id) {
         ProductCategory entity = productCategoryRepository.findById(id)
                 .orElseThrow(() -> new ProductCategoryNotFoundException(id));
         return productCategoryMapper.toResponse(entity);
     }
 
-    public ProductCategoryResponse updateCategory(BigInteger id, ProductCategoryRequest request) {
+    public ProductCategoryResponse updateCategory(Long id, ProductCategoryRequest request) {
         ProductCategory entity = productCategoryRepository.findById(id)
                 .orElseThrow(() -> new ProductCategoryNotFoundException(id));
         productCategoryMapper.mapRequestToEntity(entity, request);
         return productCategoryMapper.toResponse(productCategoryRepository.save(entity));
     }
 
-    public void deleteCategory(BigInteger id) {
+    public void deleteCategory(Long id) {
         ProductCategory entity = productCategoryRepository.findById(id)
                 .orElseThrow(() -> new ProductCategoryNotFoundException(id));
         productCategoryRepository.delete(entity);

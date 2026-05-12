@@ -28,7 +28,10 @@ public class ProductCategoryController {
     private final ProductCategoryService productCategoryService;
     private final ProductCategoryMapper productCategoryMapper;
 
-    public ProductCategoryController(ProductCategoryService productCategoryService, ProductCategoryMapper productCategoryMapper) {
+    public ProductCategoryController(
+            ProductCategoryService productCategoryService,
+            ProductCategoryMapper productCategoryMapper
+    ) {
         this.productCategoryService = productCategoryService;
         this.productCategoryMapper = productCategoryMapper;
     }
@@ -67,14 +70,14 @@ public class ProductCategoryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductCategoryResponse> show(@PathVariable BigInteger id) {
+    public ResponseEntity<ProductCategoryResponse> show(@PathVariable Long id) {
         ProductCategoryResponse response = productCategoryService.findCategory(id);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ProductCategoryResponse> update(
-            @PathVariable BigInteger id,
+            @PathVariable Long id,
             @Valid @RequestBody ProductCategoryRequest request
     ) {
         ProductCategoryResponse response = productCategoryService.updateCategory(id, request);
@@ -82,7 +85,7 @@ public class ProductCategoryController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> destroy(@PathVariable BigInteger id) {
+    public ResponseEntity<Void> destroy(@PathVariable Long id) {
         productCategoryService.deleteCategory(id);
         return ResponseEntity.ok().build();
     }

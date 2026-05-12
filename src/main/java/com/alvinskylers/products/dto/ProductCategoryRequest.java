@@ -4,12 +4,10 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
 
-import java.math.BigInteger;
-
 @Builder
 public record ProductCategoryRequest(
 
-        BigInteger id,
+        Long id,
 
         @NotBlank(message = "Name is required")
         @Size(min=3, max=20, message="name is 3 to 20 characters")

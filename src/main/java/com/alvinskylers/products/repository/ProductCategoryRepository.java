@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.math.BigInteger;
 
 @Repository
-public interface ProductCategoryRepository extends JpaRepository<ProductCategory, BigInteger> {
+public interface ProductCategoryRepository extends JpaRepository<ProductCategory, Long> {
 
     @Query("SELECT c " +
             "FROM ProductCategory c " +
