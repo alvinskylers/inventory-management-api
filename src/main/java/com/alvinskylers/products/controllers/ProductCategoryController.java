@@ -80,4 +80,10 @@ public class ProductCategoryController {
         ProductCategoryResponse response = productCategoryService.updateCategory(id, request);
         return  ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> destroy(@PathVariable BigInteger id) {
+        productCategoryService.deleteCategory(id);
+        return ResponseEntity.ok().build();
+    }
 }

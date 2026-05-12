@@ -46,4 +46,10 @@ public class ProductCategoryService {
         productCategoryMapper.mapRequestToEntity(entity, request);
         return productCategoryMapper.toResponse(productCategoryRepository.save(entity));
     }
+
+    public void deleteCategory(BigInteger id) {
+        ProductCategory entity = productCategoryRepository.findById(id)
+                .orElseThrow(() -> new ProductCategoryNotFoundException(id));
+        productCategoryRepository.delete(entity);
+    }
 }
