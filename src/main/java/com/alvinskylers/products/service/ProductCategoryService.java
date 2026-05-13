@@ -10,8 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.math.BigInteger;
-
 @Service
 public class ProductCategoryService {
 
@@ -38,6 +36,11 @@ public class ProductCategoryService {
         ProductCategory entity = productCategoryRepository.findById(id)
                 .orElseThrow(() -> new ProductCategoryNotFoundException(id));
         return productCategoryMapper.toResponse(entity);
+    }
+
+    public ProductCategory findCategoryEntity(Long id) {
+        return productCategoryRepository.findById(id)
+                .orElseThrow(() -> new ProductCategoryNotFoundException(id));
     }
 
     public ProductCategoryResponse updateCategory(Long id, ProductCategoryRequest request) {

@@ -8,13 +8,14 @@ import java.time.LocalDateTime;
 
 @Builder
 public record ProductResponse(
-        String id,
+        Long id,
+        String name,
         String sku,
         String slug,
         String description,
         BigDecimal price,
         BigDecimal weight,
-        ProductCategory productCategory,
+        ProductCategoryResponse productCategory,
         LocalDateTime createdAt
 ) {
 
