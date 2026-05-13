@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -29,9 +30,11 @@ public class Product {
 
     private String description;
 
-    private double price;
+    @Column(precision = 10, scale = 2)
+    private BigDecimal price;
 
-    private double weight;
+    @Column(precision = 8, scale = 3)
+    private BigDecimal weight;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_category_id")
