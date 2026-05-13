@@ -6,7 +6,7 @@ import lombok.Builder;
 @Builder
 public record ProductRequest(
 
-        @Size(max=100, message = "name should be under 100 characters")
+        @Size(min=6 ,max=100, message = "name should be between 6 to 100 characters")
         @NotBlank
         String name,
 

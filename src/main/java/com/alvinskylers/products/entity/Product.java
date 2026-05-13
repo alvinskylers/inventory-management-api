@@ -31,6 +31,8 @@ public class Product {
 
     private double price;
 
+    private double weight;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_category_id")
     private ProductCategory productCategory;
