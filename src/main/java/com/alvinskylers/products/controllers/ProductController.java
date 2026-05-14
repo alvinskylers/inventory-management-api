@@ -85,4 +85,11 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductResponse> show(@PathVariable Long id) {
+        ProductResponse response = productService.showProduct(id);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+
+    }
+
 }

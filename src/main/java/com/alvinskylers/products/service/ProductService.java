@@ -3,6 +3,7 @@ package com.alvinskylers.products.service;
 import com.alvinskylers.products.dto.ProductRequest;
 import com.alvinskylers.products.dto.ProductResponse;
 import com.alvinskylers.products.entity.Product;
+import com.alvinskylers.products.exception.ProductNotFoundException;
 import com.alvinskylers.products.mapper.ProductMapper;
 import com.alvinskylers.products.repository.ProductRepository;
 import org.springframework.data.domain.Page;
@@ -58,6 +59,12 @@ public class ProductService {
     public ProductResponse createProduct(ProductRequest request)  {
         Product product = productMapper.toEntity(request);
         productRepository.save(product);
+        return productMapper.toResponse(product);
+    }
+
+    public ProductResponse showProduct(Long id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException(id));
         return productMapper.toResponse(product);
     }
 
