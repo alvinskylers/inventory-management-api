@@ -1,4 +1,8 @@
 spring:
+  jackson:
+    parser:
+      allow-unquoted-control-chars: true
+
   application:
     name: products
 

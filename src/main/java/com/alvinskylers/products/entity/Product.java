@@ -28,6 +28,7 @@ public class Product {
 
     private String slug;
 
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @Column(precision = 10, scale = 2)
