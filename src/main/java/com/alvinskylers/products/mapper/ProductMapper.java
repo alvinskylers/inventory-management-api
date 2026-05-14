@@ -65,6 +65,7 @@ public class ProductMapper {
                 .price(entity.getPrice())
                 .weight(entity.getWeight())
                 .productCategory(response)
+                .createdAt(entity.getCreatedAt())
                 .build();
     }
 

@@ -1,19 +1,17 @@
 package com.alvinskylers.products.controllers;
 
+import com.alvinskylers.products.dto.ProductRequest;
 import com.alvinskylers.products.dto.ProductResponse;
 import com.alvinskylers.products.entity.Product;
 import com.alvinskylers.products.mapper.ProductMapper;
 import com.alvinskylers.products.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -78,6 +76,12 @@ public class ProductController {
         response.put("hasPrevious", productPage.hasPrevious());
 
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<ProductResponse> create(@Valid @RequestBody ProductRequest request) {
+        ProductResponse response = productService.createProduct(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
 }

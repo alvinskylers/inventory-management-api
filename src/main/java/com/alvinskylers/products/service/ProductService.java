@@ -1,5 +1,6 @@
 package com.alvinskylers.products.service;
 
+import com.alvinskylers.products.dto.ProductRequest;
 import com.alvinskylers.products.dto.ProductResponse;
 import com.alvinskylers.products.entity.Product;
 import com.alvinskylers.products.mapper.ProductMapper;
@@ -14,9 +15,11 @@ import java.math.BigDecimal;
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final ProductMapper productMapper;
 
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, ProductMapper productMapper) {
         this.productRepository = productRepository;
+        this.productMapper = productMapper;
     }
 
     public Page<Product> findAll(Pageable pageable) {
@@ -52,6 +55,11 @@ public class ProductService {
         return productRepository.filterProductByMaxPrice(max, pageable);
     }
 
+    public ProductResponse createProduct(ProductRequest request)  {
+        Product product = productMapper.toEntity(request);
+        productRepository.save(product);
+        return productMapper.toResponse(product);
+    }
 
 
 
