@@ -23,14 +23,7 @@ public class ProductMapper {
         this.productCategoryService = productCategoryService;
     }
 
-    public Product toEntity(ProductRequest request) {
-
-        ProductCategory productCategory = null;
-
-        if (request.categoryId() != null) {
-            productCategory = productCategoryService.findCategoryEntity(request.categoryId());
-        }
-
+    public Product toEntity(ProductRequest request, ProductCategory category) {
         return Product.builder()
                 .name(request.name())
                 .sku(generator.generateSKU(request.name()))
@@ -38,7 +31,7 @@ public class ProductMapper {
                 .description(request.description())
                 .price(request.price())
                 .weight(request.weight())
-                .productCategory(productCategory)
+                .productCategory(category)
                 .build();
     }
 
@@ -69,14 +62,7 @@ public class ProductMapper {
                 .build();
     }
 
-    public void updateEntity(Product product, ProductRequest request) {
-
-        ProductCategory productCategory = null;
-
-        if (request.categoryId() != null) {
-            productCategory = productCategoryService.findCategoryEntity(request.categoryId());
-        }
-
+    public void updateEntity(Product product, ProductRequest request, ProductCategory productCategory) {
         product.setName(request.name());
         product.setDescription(request.description());
         product.setSku(generator.generateSKU(request.name()));
