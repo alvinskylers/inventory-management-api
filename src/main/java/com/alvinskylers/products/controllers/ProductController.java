@@ -89,7 +89,14 @@ public class ProductController {
     public ResponseEntity<ProductResponse> show(@PathVariable Long id) {
         ProductResponse response = productService.showProduct(id);
         return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductResponse> update(
+            @PathVariable Long id,
+            @Valid @RequestBody ProductRequest request) {
+        ProductResponse response = productService.updateProduct(id, request);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
 }

@@ -69,4 +69,21 @@ public class ProductMapper {
                 .build();
     }
 
+    public void updateEntity(Product product, ProductRequest request) {
+
+        ProductCategory productCategory = null;
+
+        if (request.categoryId() != null) {
+            productCategory = productCategoryService.findCategoryEntity(request.categoryId());
+        }
+
+        product.setName(request.name());
+        product.setDescription(request.description());
+        product.setSku(generator.generateSKU(request.name()));
+        product.setSlug(generator.generateSlug(request.name()));
+        product.setPrice(request.price());
+        product.setWeight(request.weight());
+        product.setProductCategory(productCategory);
+    }
+
 }
