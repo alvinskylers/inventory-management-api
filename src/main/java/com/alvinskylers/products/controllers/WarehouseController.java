@@ -79,4 +79,10 @@ public class WarehouseController {
         WarehouseResponse response = warehouseService.update(id, request);
         return ResponseEntity.ok().body(response);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> destroy(@PathVariable Long id) {
+        warehouseService.delete(id);
+        return ResponseEntity.ok().build();
+    }
 }

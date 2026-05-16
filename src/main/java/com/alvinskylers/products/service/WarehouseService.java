@@ -47,4 +47,10 @@ public class WarehouseService {
         return warehouseMapper.toResponse(warehouse);
     }
 
+    public void delete(Long id) {
+        Warehouse warehouse = warehouseRepository.findById(id)
+                .orElseThrow(() -> new WarehouseNotFoundException(id));
+        warehouseRepository.delete(warehouse);
+    }
+
 }
