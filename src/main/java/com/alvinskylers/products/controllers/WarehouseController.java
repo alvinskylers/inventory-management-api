@@ -1,19 +1,21 @@
 package com.alvinskylers.products.controllers;
 
+import com.alvinskylers.products.dto.ProductRequest;
+import com.alvinskylers.products.dto.WarehouseRequest;
 import com.alvinskylers.products.dto.WarehouseResponse;
+import com.alvinskylers.products.entity.Product;
 import com.alvinskylers.products.entity.Warehouse;
 import com.alvinskylers.products.mapper.WarehouseMapper;
 import com.alvinskylers.products.service.WarehouseService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,5 +56,12 @@ public class WarehouseController {
         response.put("hasPrevious", warehousePage.hasPrevious());
 
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping
+    public ResponseEntity<WarehouseResponse> create(@Valid @RequestBody WarehouseRequest request) {
+        WarehouseResponse response = warehouseService.create(request);
+        URI location = URI.create("/api/v1/warehouse/" + response.id());
+        return ResponseEntity.created(location).body(response);
     }
 }
