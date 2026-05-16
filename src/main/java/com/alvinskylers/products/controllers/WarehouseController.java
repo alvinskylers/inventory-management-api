@@ -64,4 +64,10 @@ public class WarehouseController {
         URI location = URI.create("/api/v1/warehouse/" + response.id());
         return ResponseEntity.created(location).body(response);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<WarehouseResponse> show(@PathVariable Long id) {
+        WarehouseResponse response = warehouseService.show(id);
+        return ResponseEntity.ok().body(response);
+    }
 }
