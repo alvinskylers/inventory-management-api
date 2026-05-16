@@ -23,4 +23,9 @@ public class WarehouseMapper {
                 .createdAt(entity.getCreatedAt())
                 .build();
     }
+
+    public void updateEntity(Warehouse entity, WarehouseRequest request) {
+        entity.setName(request.name());
+        entity.setAddress(request.address());
+    }
 }

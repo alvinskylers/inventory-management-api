@@ -39,4 +39,12 @@ public class WarehouseService {
         return warehouseMapper.toResponse(warehouse);
     }
 
+    public WarehouseResponse update(Long id, WarehouseRequest request) {
+        Warehouse warehouse = warehouseRepository.findById(id)
+                .orElseThrow(() -> new WarehouseNotFoundException(id));
+        warehouseMapper.updateEntity(warehouse, request);
+        warehouseRepository.save(warehouse);
+        return warehouseMapper.toResponse(warehouse);
+    }
+
 }

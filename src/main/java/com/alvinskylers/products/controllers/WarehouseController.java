@@ -70,4 +70,13 @@ public class WarehouseController {
         WarehouseResponse response = warehouseService.show(id);
         return ResponseEntity.ok().body(response);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<WarehouseResponse> update(
+            @PathVariable Long id,
+            @Valid @RequestBody WarehouseRequest request
+    ) {
+        WarehouseResponse response = warehouseService.update(id, request);
+        return ResponseEntity.ok().body(response);
+    }
 }
